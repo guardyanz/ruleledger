@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Test / coverage artefacts
+.pytest_cache/
+.coverage
+htmlcov/
+.env
+.env.*
+.graphify_cache/
+graphify-out/
+# RuleLedger working files (per-project, not part of the skill repo).
+# The copies under examples/ ARE part of the repo, so they are un-ignored.
+RULES.md
+AUDIT.md
+LEDGER.md
+!examples/**/RULES.md
+!examples/**/AUDIT.md
+!examples/**/LEDGER.md
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

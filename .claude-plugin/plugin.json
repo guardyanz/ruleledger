@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "Wardiyan"
+  },
+  "description": "Keep standing rules from rotting in long AI agent sessions: extract numbered rules, freeze them with a hash, re-read before shipping, audit every rule against the diff, and record the verdict in a ledger.",
+  "keywords": [
+    "agent-skills",
+    "claude-code",
+    "standing-rules",
+    "context-rot",
+    "code-review"
+  ],
+  "license": "MIT",
+  "name": "ruleledger",
+  "repository": "https://github.com/guardyanz/ruleledger",
+  "skills": [
+    "./"
+  ],
+  "version": "0.1.0"
+}

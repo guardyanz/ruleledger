@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "description": "Marketplace for the RuleLedger skill: standing rules that survive long AI agent sessions.",
+    "version": "0.1.0"
+  },
+  "name": "ruleledger-marketplace",
+  "owner": {
+    "name": "guardyanz"
+  },
+  "plugins": [
+    {
+      "description": "Keep standing rules from rotting in long AI agent sessions. Extract numbered rules, freeze them with a hash, re-read them before shipping, audit every rule against the diff with file and line evidence, and record the verdict in a ledger. Use when a project has standing rules and the agent will ship code in a long session, after compaction, or across multiple sessions.",
+      "name": "ruleledger",
+      "source": "./",
+      "version": "0.1.0"
+    }
+  ]
+}

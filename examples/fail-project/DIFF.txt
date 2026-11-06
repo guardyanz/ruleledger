@@ -1,0 +1,31 @@
+diff --stat
+ src/handlers.py         | 21 +++++++++++++++++++++
+ tests/test_handlers.py  | 12 ++++++++++++
+ 2 files changed, 33 insertions(+)
+
+diff --git a/src/handlers.py b/src/handlers.py
+new file mode 100644
+--- /dev/null
++++ b/src/handlers.py
+@@ -0,0 +1,21 @@
++"""Request handlers."""
++
++from db import query
++from errors import json_error
++
++
++def show_user(request):
++    """Return one user as JSON, or a JSON error body (R-03)."""
++    user_id = request.params.get("id")
++    if not user_id:
++        return json_error("missing user id", status=400)
++    rows = query("SELECT id, name FROM users WHERE id = ?", (user_id,))
++    if not rows:
++        return json_error("user not found", status=404)
++    user = rows[0]
++    return {"id": user["id"], "name": user["name"]}
++
++
++def greet(request):
++    """Greeting endpoint. All user-facing copy is in English (R-01)."""
++    return {"message": "Welcome back!"}

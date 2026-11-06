@@ -1,0 +1,48 @@
+diff --stat
+ src/errors.py           | 7 +++++++
+ src/handlers.py         | 21 +++++++++++++++++++++
+ src/messages.py         | 5 +++++
+ src/repository.py       | 9 +++++++++
+ tests/test_handlers.py  | 12 ++++++++++++
+ 5 files changed, 54 insertions(+)
+
+diff --git a/src/handlers.py b/src/handlers.py
+new file mode 100644
+--- /dev/null
++++ b/src/handlers.py
+@@ -0,0 +1,21 @@
++"""Request handlers. Handlers never touch the database directly (R-02):
++all persistence goes through the repository in repository.py."""
++
++from errors import json_error
++from repository import get_user
++
++
++def show_user(request):
++    """Return one user as JSON, or a JSON error body (R-03)."""
++    user_id = request.params.get("id")
++    if not user_id:
++        return json_error("missing user id", status=400)
++    user = get_user(user_id)
++    if user is None:
++        return json_error("user not found", status=404)
++    return {"id": user["id"], "name": user["name"]}
++
++
++def greet(request):
++    """Greeting endpoint. All user-facing copy is in English (R-01)."""
++    return {"message": "Welcome back!"}
++
++--- a/src/repository.py
+++++ b/src/repository.py
++@@ -0,0 +1,9 @@
+++"""Persistence layer. This is the only module allowed to talk to the
+++database. Handlers call these functions instead (R-02)."""
+++
+++from db import query
+++
+++
+++def get_user(user_id):
+++    """Fetch one user row by id. Returns a dict or None."""
+++    rows = query("SELECT id, name FROM users WHERE id = ?", (user_id,))
+++    return rows[0] if rows else None
